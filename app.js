@@ -1,5 +1,10 @@
-const darkModeStart = 21
-const darkModeEnd = 7
+var darkModeStart = 21 // 9pm
+var darkModeEnd = 7 // 7am
+
+var opacities = {
+    light: 1,
+    dark: 0.2
+}
 
 var clock = new Vue({
     el: '#clock',
@@ -8,16 +13,11 @@ var clock = new Vue({
         date: '',
         bgl: '',
         previousHour: -1,
-        opacity: 1,
         mode: 'light'
     },
     computed: {
         computedOpacity: function() {
-            const opacity = {
-                light: 1,
-                dark: 0.2
-            }
-            return opacity[this.mode]
+            return opacities[this.mode]
         }
     },
     methods: {
@@ -55,12 +55,15 @@ function updateTime() {
     clock.time = zeroPadding(cd.getHours(), 2) + ':' + zeroPadding(cd.getMinutes(), 2) /*+ ':' + zeroPadding(cd.getSeconds(), 2)*/;
     clock.date = zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth() + 1, 2) + '-' + zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()];
 
-    const hour = cd.getHours();
-    const doAutomatedModeChange = clock.previousHour !== -1 && (clock.previousHour === darkModeStart - 1 && hour === darkmodeStart) || (clock.previousHour === darkModeEnd -1 && hour === darkModeEnd)
+    var hour = cd.getHours();
+
+    var doAutomatedModeChange = clock.previousHour === -1 || justChangedHour(darkModeStart, hour) || justChangedHour(darkModeEnd, hour)
+
+    clock.previousHour = hour
 
     if (doAutomatedModeChange) {
-        const nighttime = hour >= darkModeStart || hour <= darkModeEnd; // Go dark mode between 9pm and 7am
-        nighttime ? clock.darkMode() : clock.lightMode()
+        var darkModeOn = hour >= darkModeStart || hour <= darkModeEnd;
+        darkModeOn ? clock.darkMode() : clock.lightMode()
     }
 
     axios.get('https://cgm.prahlads.space/api/v1/entries/current.json', { crossdomain: true }).then(res => {
@@ -68,6 +71,10 @@ function updateTime() {
         clock.bgl = round(res.data[0].sgv / 18, 1) + ' ' + directions[res.data[0].direction];
     }).catch(console.log);
 };
+
+function justChangedHour(changeHour, hour) {
+    return clock.previousHour === changeHour - 1 && hour === changeHour
+}
 
 function round(value, precision) {
     var multiplier = Math.pow(10, precision || 0);
@@ -81,4 +88,3 @@ function zeroPadding(num, digit) {
     }
     return (zero + num).slice(-digit);
 }
-//# sourceURL=pen.js
