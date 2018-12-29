@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Share+Tech+Mono">
 <link rel="stylesheet" href="./styles.css">
-</head><body>
+</head><body class="lightmode">
 <div id="clock">
   <p class="date" v-bind:class="[isDarkmode? darkmodeClass: lightmodeClass]">{{date}}</p>
   <p class="time" v-bind:class="[isDarkmode? darkmodeClass: lightmodeClass]" v-on:click="switchmode()">{{hour}}<span v-bind:style="{opacity: separatorOpacity}">:</span>{{minutes}}</p>

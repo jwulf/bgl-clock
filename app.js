@@ -30,12 +30,15 @@ var clock = new Vue({
     methods: {
         darkMode: function() {
             this.isDarkmode = true
+            document.body.setAttribute('class', 'darkmode'); //javascript
+
         },
         lightMode: function() {
             this.isDarkmode = false
+            document.body.setAttribute('class', 'lightmode'); //javascript
         },
         switchmode: function() {
-            this.isDarkmode = !this.isDarkmode
+            this.isDarkmode ? this.lightMode() : this.darkMode()
         }
     }
 });
@@ -72,7 +75,7 @@ function updateTime() {
 
     if (doAutomatedModeChange) {
         var darkModeOn = hour >= darkModeStart || hour <= darkModeEnd;
-        clock.isDarkmode = darkModeOn
+        darkModeOn ? darkMode(): lightMode()
     }
 };
 
