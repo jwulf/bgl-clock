@@ -23,7 +23,6 @@ p {
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   color: #daf6ff;
-  text-shadow: 0 0 20px #0aafe6, 0 0 20px rgba(10, 175, 230, 0);
 }
 
 #clock .time {
@@ -39,4 +38,12 @@ p {
   letter-spacing: 0.1em;
   font-size: 80px;
   padding: 0px 0 0;
+}
+#clock .lightmode {
+    opacity: 1;
+    text-shadow: 0 0 20px #0aafe6, 0 0 20px rgba(10, 175, 230, 0);
+}
+#clock .darkmode {
+    opacity: 0.2;
+    text-shadow: none;
 }

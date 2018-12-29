@@ -9,12 +9,14 @@ var opacities = {
 var clock = new Vue({
     el: '#clock',
     data: {
+        darkmodeClass: 'darkmode',
+        lightmodeClass: 'lightmode',
         hour: '',
         minutes: '',
         date: '',
         bgl: '',
         previousHour: -1,
-        mode: 'light',
+        isDarkmode: false,
         separatorOpacity: 1
     },
     computed: {
@@ -27,13 +29,13 @@ var clock = new Vue({
     },
     methods: {
         darkMode: function() {
-            this.mode = 'dark'
+            this.isDarkmode = true
         },
         lightMode: function() {
-            this.mode = 'light'
+            this.isDarkmode = false
         },
         switchmode: function() {
-            this.mode = this.mode === 'light' ? 'dark' : 'light'
+            this.isDarkmode = !this.isDarkmode
         }
     }
 });
@@ -70,13 +72,13 @@ function updateTime() {
 
     if (doAutomatedModeChange) {
         var darkModeOn = hour >= darkModeStart || hour <= darkModeEnd;
-        darkModeOn ? clock.darkMode() : clock.lightMode()
+        clock.isDarkmode = darkModeOn
     }
 };
 
 function updateBgl() {
     axios.get('https://cgm.prahlads.space/api/v1/entries/current.json', { crossdomain: true }).then(res => {
-        console.log('Got it');
+        console.log('Got CGM update');
         clock.bgl = round(res.data[0].sgv / 18, 1) + ' ' + directions[res.data[0].direction];
     }).catch(console.log);
 }
