@@ -42,7 +42,11 @@ p {
   padding: 0px 0 0;
 }
 </style></head><body>
-<div id="clock"><p class="date">2018-12-29 SAT</p> <p class="time">21:51</p> <p class="text">20.1 ↓︎</p></div>
+<div id="clock">
+  <p class="date">{{date}}</p> 
+  <p class="time">{{time}}</p> 
+  <p class="text">{{bgl}}</p>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 <script>var clock = new Vue({
     el: '#clock',
