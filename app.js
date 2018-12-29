@@ -9,15 +9,20 @@ var opacities = {
 var clock = new Vue({
     el: '#clock',
     data: {
-        time: '',
+        hour: '',
+        minutes: '',
         date: '',
         bgl: '',
         previousHour: -1,
-        mode: 'light'
+        mode: 'light',
+        separatorOpacity: 1
     },
     computed: {
         computedOpacity: function() {
             return opacities[this.mode]
+        },
+        separatorOpacity: function() {
+            return this.separatorOpacity;
         }
     },
     methods: {
@@ -44,12 +49,17 @@ var directions = {
 };
 
 var week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-var timerID = setInterval(updateTime, 3000);
+var timerID = setInterval(updateTime, 1000);
+var bglTimer = setInterval(updateBgl, 5000);
+
 updateTime();
+updateBgl();
 
 function updateTime() {
     var cd = new Date();
-    clock.time = zeroPadding(cd.getHours(), 2) + ':' + zeroPadding(cd.getMinutes(), 2) /*+ ':' + zeroPadding(cd.getSeconds(), 2)*/;
+    clock.hour = zeroPadding(cd.getHours(), 2);
+    clock.minutes = zeroPadding(cd.getMinutes(), 2); /*+ ':' + zeroPadding(cd.getSeconds(), 2)*/;
+    clock.separatorOpacity = (clock.separatorOpacity + 1) % 2;
     clock.date = zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth() + 1, 2) + '-' + zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()];
 
     var hour = cd.getHours();
@@ -62,12 +72,14 @@ function updateTime() {
         var darkModeOn = hour >= darkModeStart || hour <= darkModeEnd;
         darkModeOn ? clock.darkMode() : clock.lightMode()
     }
+};
 
+function updateBgl() {
     axios.get('https://cgm.prahlads.space/api/v1/entries/current.json', { crossdomain: true }).then(res => {
         console.log('Got it');
         clock.bgl = round(res.data[0].sgv / 18, 1) + ' ' + directions[res.data[0].direction];
     }).catch(console.log);
-};
+}
 
 function justChangedHour(changeHour, hour) {
     return clock.previousHour === changeHour - 1 && hour === changeHour

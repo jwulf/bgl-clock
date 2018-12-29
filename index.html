@@ -5,7 +5,7 @@
 </head><body>
 <div id="clock">
   <p class="date" v-bind:style="{opacity: computedOpacity}">{{date}}</p>
-  <p class="time" v-bind:style="{opacity: computedOpacity}" v-on:click="switchmode()">{{time}}</p>
+  <p class="time" v-bind:style="{opacity: computedOpacity}" v-on:click="switchmode()">{{hour}}<span v-bind:style="{opacity: separatorOpacity}">:</span>{{minutes}}</p>
   <p class="text" v-bind:style="{opacity: computedOpacity}">{{bgl}}</p>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
