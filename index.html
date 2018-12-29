@@ -27,6 +27,12 @@ p {
   color: #daf6ff;
   text-shadow: 0 0 20px #0aafe6, 0 0 20px rgba(10, 175, 230, 0);
 }
+#clock .light {
+  opacity: 1;  
+}
+#clock dark {
+  opacity: 0.2;
+}
 #clock .time {
   letter-spacing: 0.05em;
   font-size: 80px;
@@ -43,9 +49,9 @@ p {
 }
 </style></head><body>
 <div id="clock">
-  <p class="date">{{date}}</p> 
-  <p class="time">{{time}}</p> 
-  <p class="text">{{bgl}}</p>
+  <p class="date {{mode}}">{{date}}</p> 
+  <p class="time {{mode}}">{{time}}</p> 
+  <p class="text {{mode}}">{{bgl}}</p>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 <script>var clock = new Vue({
@@ -53,7 +59,9 @@ p {
     data: {
         time: '',
         date: '',
-        bgl: '' } });
+        bgl: '',
+        mode: 'light'
+    } });
 
 
 
@@ -75,6 +83,9 @@ function updateTime() {
     var cd = new Date();
     clock.time = zeroPadding(cd.getHours(), 2) + ':' + zeroPadding(cd.getMinutes(), 2) /*+ ':' + zeroPadding(cd.getSeconds(), 2)*/;
     clock.date = zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth() + 1, 2) + '-' + zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()];
+    var hour = cd.getHours();
+    var nighttime = hour > 21 || hour < 7; // Go dark mode between 9pm and 7am
+    clock.mode = nighttime ? 'dark' : 'light'
     axios.get('https://cgm.prahlads.space/api/v1/entries/current.json', { crossdomain: true }).then(res => {
         console.log('Got it');
         clock.bgl = round(res.data[0].sgv / 18, 1) + ' ' + directions[res.data[0].direction];
