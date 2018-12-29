@@ -33,8 +33,6 @@ var clock = new Vue({
     }
 });
 
-
-
 var directions = {
     SingleDown: '↓︎',
     DoubleDown: '↓︎↓︎',
@@ -44,7 +42,6 @@ var directions = {
     FortyFiveUp: '↗',
     Flat: '→'
 };
-
 
 var week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 var timerID = setInterval(updateTime, 3000);
