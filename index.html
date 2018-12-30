@@ -8,7 +8,7 @@
 
 <body class="lightmode">
     <div id="clock">
-        <p class="text" v-bind:class="[isDarkmode? lightmodeClass: lightmodeClass]">{{bgl}}</p>
+        <p class="text" v-bind:class="[bglOutOfDate? oldDataClass : lightmodeClass]">{{bgl}}</p>
         <p class="time" v-bind:class="[isDarkmode? darkmodeClass: lightmodeClass]" v-on:click="switchmode()">{{hour}}<span
                 v-bind:style="{opacity: separatorOpacity}">:</span>{{minutes}}</p>
         <p class="date" v-bind:class="[isDarkmode? darkmodeClass: lightmodeClass]">{{date}}</p>

@@ -3,10 +3,12 @@ var clock = new Vue({
     data: {
         darkmodeClass: 'darkmode',
         lightmodeClass: 'lightmode',
+        oldDataClass: 'oldData',
         hour: '',
         minutes: '',
         date: '',
         bgl: '',
+        bglOutOfDate: false,
         previousHour: -1,
         isDarkmode: false,
         separatorOpacity: 1
@@ -85,6 +87,16 @@ function updateBglFromNightscout() {
             console.log('Got CGM update');
             var data = res.data[0];
             var bgl = data.sgv;
+
+            // Check if Nightscout data is more than 5 mins old
+            var dateString = data.dateString;
+            var timestamp = new Date(dateString);
+            var now = new Date();
+            dataAgeMinutes = (now - timestamp) / 60 / 1000;
+            console.log({dataAgeMinutes})
+            var dataIsOld = dataAgeMinutes > nightscoutDataWindowTolerance
+            clock.bglOutOfDate = dataIsOld;
+
             if (mmol) {
                 bgl = bgl / 18;
             }

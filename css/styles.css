@@ -53,3 +53,9 @@ p {
     opacity: 0.2;
     text-shadow: none;
 }
+#clock .oldData {
+    /* color: yellow; */
+    opacity: 1;
+    text-decoration: line-through;
+    text-shadow: 0 0 20px #0aafe6, 0 0 20px rgba(10, 175, 230, 0);
+}

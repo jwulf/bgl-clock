@@ -9,6 +9,9 @@ var mmol = true
 // Poll Nightscout every how many seconds?
 var nightscoutPollInterval = 5 // seconds
 
+// If the Nightscout data is older than this, we'll change its color
+var nightscoutDataWindowTolerance = 5 //mins
+
 // Automatically go into dark mode in this time range. 24 hour notation, eg: 13 == 1pm
 var darkModeStart = 21 // 9pm
 var darkModeEnd = 7 // 7am
