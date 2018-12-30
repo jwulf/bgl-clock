@@ -81,7 +81,7 @@ function updateTime() {
 };
 
 function updateBgl() {
-    axios.get('https://cgm.prahlads.space/api/v1/entries/current.json', { crossdomain: true }).then(res => {
+    axios.get(nightscoutUrl, { crossdomain: true }).then(res => {
         console.log('Got CGM update');
         clock.bgl = round(res.data[0].sgv / 18, 1) + ' ' + directions[res.data[0].direction];
     }).catch(console.log);
