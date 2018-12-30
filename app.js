@@ -65,7 +65,8 @@ function updateTime() {
     clock.hour = zeroPadding(cd.getHours(), 2);
     clock.minutes = zeroPadding(cd.getMinutes(), 2); /*+ ':' + zeroPadding(cd.getSeconds(), 2)*/;
     clock.separatorOpacity = (clock.separatorOpacity + 1) % 2;
-    clock.date = zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth() + 1, 2) + '-' + zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()];
+    clock.date = week[cd.getDay()] + ' ' + zeroPadding(cd.getDate(), 2);
+    /*zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth() + 1, 2) + '-' + */
 
     var hour = cd.getHours();
 
@@ -75,7 +76,7 @@ function updateTime() {
 
     if (doAutomatedModeChange) {
         var darkModeOn = hour >= darkModeStart || hour <= darkModeEnd;
-        darkModeOn ? darkMode(): lightMode()
+        darkModeOn ? clock.darkMode(): clock.lightMode()
     }
 };
 
