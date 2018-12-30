@@ -1,0 +1,23 @@
+{
+  "name": "bgl-clock",
+  "version": "1.0.0",
+  "description": "A Digital Clock with Blood Glucose Data from Nightscout",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"No tests...\"",
+    "start": "http-server -p 3001 ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwulf/bgl-clock.git"
+  },
+  "author": "Josh Wulf <josh@magikcraft.io>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jwulf/bgl-clock/issues"
+  },
+  "homepage": "https://github.com/jwulf/bgl-clock#readme",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}
