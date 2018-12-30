@@ -1,15 +1,22 @@
-<html lang="en" class=""><head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Share+Tech+Mono">
-<link rel="stylesheet" href="./styles.css">
-</head><body class="lightmode">
-<div id="clock">
-    <p class="text" v-bind:class="[isDarkmode? lightmodeClass: lightmodeClass]">{{bgl}}</p>
-  <p class="time" v-bind:class="[isDarkmode? darkmodeClass: lightmodeClass]" v-on:click="switchmode()">{{hour}}<span v-bind:style="{opacity: separatorOpacity}">:</span>{{minutes}}</p>
-  <p class="date" v-bind:class="[isDarkmode? darkmodeClass: lightmodeClass]">{{date}}</p>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-<script src="./nightscout-url.js"></script>
-<script src="./app.js"></script>
-</body></html>
+<html lang="en" class="">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Share+Tech+Mono">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body class="lightmode">
+    <div id="clock">
+        <p class="text" v-bind:class="[isDarkmode? lightmodeClass: lightmodeClass]">{{bgl}}</p>
+        <p class="time" v-bind:class="[isDarkmode? darkmodeClass: lightmodeClass]" v-on:click="switchmode()">{{hour}}<span
+                v-bind:style="{opacity: separatorOpacity}">:</span>{{minutes}}</p>
+        <p class="date" v-bind:class="[isDarkmode? darkmodeClass: lightmodeClass]">{{date}}</p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="./nightscout-url.js"></script>
+    <script src="./app.js"></script>
+</body>
+
+</html>
