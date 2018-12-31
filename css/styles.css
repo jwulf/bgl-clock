@@ -47,6 +47,7 @@ p {
 }
 #clock .lightmode {
     opacity: 1;
+    text-decoration: none;
     text-shadow: 0 0 20px #0aafe6, 0 0 20px rgba(10, 175, 230, 0);
 }
 #clock .darkmode {
