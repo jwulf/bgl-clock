@@ -100,7 +100,7 @@ function updateBglFromNightscout() {
             if (mmol) {
                 bgl = bgl / 18;
             }
-            var arrow = arrows[data.direction];
+            var arrow = arrows[data.direction] || '';
             clock.bgl = round(bgl, 1) + ' ' + arrow;
         } catch (e) {
             // This will happen if Nightscout returns no BGL data
