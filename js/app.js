@@ -63,7 +63,7 @@ function doAutomatedDarkModeCheck(cd) {
     var doAutomatedDarkModeChange =  clockJustStarted || justChangedInto(darkModeStart) || justChangedInto(darkModeEnd)
     clock.previousHour = hour
     if (doAutomatedDarkModeChange) {
-        var weInDarkModeNow = hour >= darkModeStart || hour <= darkModeEnd;
+        var weInDarkModeNow = hour >= darkModeStart || hour < darkModeEnd;
         if (weInDarkModeNow) {
             clock.darkMode()
         } else {
