@@ -24,7 +24,7 @@ var clock = new Vue({
     methods: {
         darkMode: function() {
             this.isDarkmode = true
-            document.body.setAttribute('class', 'darkmode'); //javascript
+            document.body.setAttribute('class', 'lightmode'); // 'darkmode'); //javascript
 
         },
         lightMode: function() {
